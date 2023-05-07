@@ -63,6 +63,9 @@ export default function Home() {
     formData.append('file', file);
     formData.append('upload_preset', "nakset");
     formData.append('api_key', "171741584542441");
+    formData.append('timeout', 30000);
+
+  
 
     try {
       const response = await axios.post(
@@ -81,6 +84,7 @@ export default function Home() {
         
         
         const respo = await fetch('https://univariant-linear-regression.vercel.app/api/hello', {
+          timeout: 30000,
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
