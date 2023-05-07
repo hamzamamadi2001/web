@@ -80,7 +80,7 @@ export default function Home() {
         const imageUrl = response.data.secure_url;
         
         
-        const respo = await fetch('http://localhost:3000/api/hello', {
+        const respo = await fetch('https://univariant-linear-regression.vercel.app/api/hello', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
