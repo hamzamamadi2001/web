@@ -11,6 +11,8 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
 
 var desiredcolumn = (parseInt(req.body.index)-1)*-1;
 console.log(req.body)
