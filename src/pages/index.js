@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { Inter, Pacifico } from 'next/font/google'
+import { Roboto ,Proza_Libre} from 'next/font/google'
 
 import {SiMicrosoftexcel } from 'react-icons/si';
 import {BsFillCheckCircleFill } from 'react-icons/bs';
@@ -10,7 +11,14 @@ import axios from 'axios';
 import XLSX from 'xlsx';
 
 
+
+
 const inter = Inter({ subsets: ['latin'] })
+const pacifico = Pacifico({ subsets: ['latin'], weight: "400" })
+const roboto = Roboto({ subsets: ['latin'], weight: "700" })
+const proza = Proza_Libre({ subsets: ['latin'], weight: "700" })
+
+
 
 export default function Home() {
   const [columnregression, setcolumnregression] = useState(0);
@@ -249,23 +257,7 @@ sety(res1[1])
   return (
 
     <>
-     <div class=" bg-gray-100 min-w-screen">
-    
-    <header class="w-full text-gray-700 bg-white border-t border-gray-100 shadow-sm body-font">
-        <div class="container  flex justify-center  flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
-
-             
-             
-                <p className='text-blue-600 font-bold '><span className='font-bold text-red-600 text-2xl'>L</span>inear regresstion calculator</p>
-             
-            
-        </div>
-    </header>
-   
      
-    
-    
-</div>
 
 
 
@@ -285,13 +277,14 @@ sety(res1[1])
 
 
 
-<div class="py-16 bg-gray-50 overflow-hidden">
+<div class={`py-16 bg-gray-50 overflow-hidden`+ roboto.className}>
     <div class="container m-auto px-6 space-y-8 text-gray-500 md:px-12">
         <div>
-            <span class="text-gray-600 text-lg font-semibold">how ti works</span>
-            <h2 class="mt-4 text-2xl text-gray-900 font-bold md:text-4xl">A small demo of making Linear regression model <br class="lg:block" hidden /> and some charts for data</h2>
+            {/* <span class="text-gray-600 text-lg font-semibold">how ti works</span> */}
+            <h2 class={`mt-4 text-2xl text-gray-900 md:text-4xl  text-center ${proza.className}` }>Plot System for 2 dimentional Excel Data</h2>
+            <p class="text-center">project for web development module.</p>
         </div>
-        <div class="mt-16 grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-4">
+        {/* <div class="mt-16 grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-4">
             <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                 <div class="relative p-8 space-y-8">
                      
@@ -332,7 +325,7 @@ sety(res1[1])
                     
                 </div>
             </div>
-        </div>
+        </div> */}
     </div>
 </div>
 
@@ -415,27 +408,7 @@ sety(res1[1])
             </div>
           </label>
         </div>
-{columnsname.length<=0 || existerror == 1?(<div></div>):(<div class="mb-5">
-        <label
-          for="email"
-          class="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          select the column you want to predict
-        </label>
-        <select
-        value={columnregression}
-        onChange={(e) => {
-          setcolumnregression(parseInt(e.target.value) );
-          
-        }}
-      >
-{columnsname.map((column,index) =>{
-  return <option value={index}>{column}</option>
-})}
-        
-        
-      </select>
-      </div>)}
+ 
         
 
        
@@ -474,14 +447,14 @@ sety(res1[1])
    </div>)  }
       </div>
 
-      <div>
+      {/* <div>
         <button
          onClick={async ()=>{await handleSubmit()}}
           class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
         >
           Send File
         </button>
-      </div>
+      </div> */}
       
 
 
@@ -517,45 +490,64 @@ sety(res1[1])
         </div>
         
         )}
+<div className='flex justify-center items-center gap-5'>
 
+<button className='bg-blue-600 text-white p-4 font-bold' onClick={() => {
 
+  
+          settypeofchart("bar");
+          
+        }} >
+      bar
+      </button>
+      <button className='bg-blue-600 text-white p-4 font-bold' onClick={() => {
+          settypeofchart("pointcloud");
+          
+        }} >
+      pointcloud
+      </button>
+      <button className='bg-blue-600 text-white p-4 font-bold' onClick={() => {
+          settypeofchart("scatter");
+          
+        }} >
+      scatter
+      </button>
+      <button className='bg-blue-600 text-white p-4 font-bold'onClick={() => {
+          settypeofchart("box");
+          
+        }} >
+      box
+      </button>
+      {/* <button className='bg-blue-600 text-white p-4 font-bold' onClick={() => {
+          settypeofchart("funnel");
+          
+        }} >
+      funnel
+      </button>  */}
 
-
-{completed&&(
+      <button className='bg-blue-600 text-white p-4 font-bold' onClick={() => {
+          settypeofchart("histogram");
+          
+        }} >
+      histogram
+      </button>
+      <button className='bg-blue-600 text-white p-4 font-bold' onClick={() => {
+          settypeofchart("violin");
+          
+        }} >
+      violin
+      </button>
+</div>
+ 
   
 <div className='flex justify-center items-center'>
-<div className='mt-10 flex justify-center items-center flex-col'>
-  <p className='font-bold text-gray-800 text-xl'>select chart type :</p>
-  <select
-  className='bg-slate-300'
-        value={typeofchart}
-        onChange={(e) => {
-          settypeofchart(e.target.value );
-          
-        }}
-      >
  
-    <option value="bar">bar</option>
-    <option value="pointcloud">pointcloud</option>
-    <option value="scatter">scatter</option>
-    <option value="box">box</option>
-    <option value="funnel">funnel</option>
-    <option value="histogram">histogram</option>
-    <option value="violin">violin</option>
-
-
-
- 
-        
-        
-      </select>
-</div>
 <Plot  data={[{
-  x:x,y:y,type:typeofchart,mode:"text+lines+markers",marker:{color:"red"},x
+  x:x,y:y,type:typeofchart,mode:"text+lines+markers",marker:{color:"blue"},x
 }]}
-layout={{width:"100%",height:500,title:"title",xaxis:{title:columnsname[columnregression]},yaxis:{title:columnsname[ (columnregression - 1) * -1]}}}
+layout={{width:600,height:400,title:"title",xaxis:{title:columnsname[columnregression]},yaxis:{title:columnsname[ (columnregression - 1) * -1]}}}
 
-/></div> )}
+/></div> 
    
     </div>
   </div>
